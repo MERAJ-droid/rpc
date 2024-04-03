@@ -4,6 +4,12 @@ document.addEventListener('DOMContentLoaded', () => {
   const userChoiceElement = document.getElementById('user-choice');
   const computerChoiceElement = document.getElementById('computer-choice');
   const resultTextElement = document.getElementById('result-text');
+  const userScoreElement = document.getElementById('user-score');
+  const computerScoreElement = document.getElementById('computer-score');
+  const body = document.body;
+
+  let userScore = 0;
+  let computerScore = 0;
 
   buttons.forEach(button => {
       button.addEventListener('click', () => {
@@ -11,9 +17,28 @@ document.addEventListener('DOMContentLoaded', () => {
           const computerChoice = choices[Math.floor(Math.random() * choices.length)];
           const result = getResult(userChoice, computerChoice);
 
-          userChoiceElement.textContent = `You chose: ${userChoice}`;
-          computerChoiceElement.textContent = `Computer chose: ${computerChoice}`;
+          userChoiceElement.textContent = `You chose: ${capitalize(userChoice)}`;
+          computerChoiceElement.textContent = `Computer chose: ${capitalize(computerChoice)}`;
           resultTextElement.textContent = result;
+
+          // Remove any existing animation classes
+          body.classList.remove('win', 'lose');
+
+          if (result === 'You win!') {
+              userScore++;
+              body.classList.add('win');
+          } else if (result === 'You lose!') {
+              computerScore++;
+              body.classList.add('lose');
+          }
+
+          userScoreElement.textContent = `You: ${userScore}`;
+          computerScoreElement.textContent = `Computer: ${computerScore}`;
+
+          // Remove animation classes after animation ends
+          setTimeout(() => {
+              body.classList.remove('win', 'lose');
+          }, 1500); // Same as the animation duration
       });
   });
 
@@ -31,5 +56,9 @@ document.addEventListener('DOMContentLoaded', () => {
       } else {
           return 'You lose!';
       }
+  }
+
+  function capitalize(word) {
+      return word.charAt(0).toUpperCase() + word.slice(1);
   }
 });

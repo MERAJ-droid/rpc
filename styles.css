@@ -88,3 +88,37 @@ h1 {
     font-weight: bold;
     color: #ffeb3b;
 }
+
+/* Rest of the existing styles... */
+
+body.win {
+    animation: win-animation 1.5s ease-in-out;
+}
+
+body.lose {
+    animation: lose-animation 1.5s ease-in-out;
+}
+
+@keyframes win-animation {
+    0% {
+        background: linear-gradient(to right, #4facfe, #00f2fe);
+    }
+    50% {
+        background: linear-gradient(to right, #7CFC00, #32CD32);
+    }
+    100% {
+        background: linear-gradient(to right, #4facfe, #00f2fe);
+    }
+}
+
+@keyframes lose-animation {
+    0% {
+        background: linear-gradient(to right, #4facfe, #00f2fe);
+    }
+    50% {
+        background: linear-gradient(to right, #ff4e50, #ff0000);
+    }
+    100% {
+        background: linear-gradient(to right, #4facfe, #00f2fe);
+    }
+}
